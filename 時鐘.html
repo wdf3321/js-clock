@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./taichicss.css" />
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Michroma&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background: rgb(255, 242, 240);
+      }
+      #clock {
+        /* background: #adfbff; */
+        width: 1920px;
+        height: 1080px;
+        margin: auto;
+        position: absolute;
+        border-radius: 50%;
+        top: 0%;
+        left: 0%;
+        transition: transform(-50%, -50%);
+        font-family: "Michroma", sans-serif;
+      }
+      #hour {
+        width: 150px;
+        height: 150px;
+        background: #fff;
+        position: absolute;
+        top: 30%;
+        left: 20%;
+        line-height: 150px;
+        text-align: center;
+        border-radius: 10px;
+        font-size: 72px;
+        color: rgb(127, 127, 137);
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+          rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+          rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        animation: pulse;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+      }
+      #minute {
+        width: 150px;
+        height: 150px;
+        background: #fff;
+        position: absolute;
+        top: 30%;
+        left: 35%;
+        line-height: 150px;
+        text-align: center;
+        border-radius: 10px;
+        font-size: 72px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+          rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+          rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        animation: pulse;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        color: rgb(127, 127, 137);
+      }
+      #second {
+        width: 150px;
+        height: 150px;
+        background: #fff;
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        line-height: 150px;
+        text-align: center;
+        border-radius: 10px;
+        font-size: 72px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+          rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+          rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        animation: pulse;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        color: rgb(127, 127, 137);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="clock">
+      <div id="hour"></div>
+      <div id="minute"></div>
+      <div id="second" class="animate__pulse"></div>
+    </div>
+
+    <script>
+      const hour = document.getElementById("hour");
+      const minute = document.getElementById("minute");
+      const second = document.getElementById("second");
+      const digital = document.getElementById("digital");
+
+      setInterval(() => {
+        const date = new Date();
+        if (date.getHours() < 10) {
+          hour.innerText = "0" + `${date.getHours()}`;
+        } else {
+          hour.innerText = `${date.getHours()}`;
+        }
+
+        if (date.getMinutes() < 10) {
+          minute.innerText = "0" + `${date.getMinutes()}`;
+        } else {
+          minute.innerText = `${date.getMinutes()}`;
+        }
+
+        if (date.getSeconds() < 10) {
+          second.innerText = "0" + `${date.getSeconds()}`;
+        } else {
+          second.innerText = `${date.getSeconds()}`;
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>
