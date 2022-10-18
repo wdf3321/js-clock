@@ -20,12 +20,23 @@
         overflow: hidden;
         background: rgb(255, 242, 240);
       }
+      select {
+        width: 100px;
+        height: 50px;
+        border-radius: 20%;
+        text-align: center;
+      }
+      #timezone {
+        position: absolute;
+        top: 20%;
+        left: 20%;
+      }
       #clock {
         /* background: #adfbff; */
         width: 1920px;
         height: 1080px;
         margin: auto;
-        position: absolute;
+        position: relative;
         border-radius: 50%;
         top: 0%;
         left: 0%;
@@ -89,40 +100,84 @@
         animation-iteration-count: infinite;
         color: rgb(127, 127, 137);
       }
+      #p1 {
+        font-size: 10rem;
+        position: absolute;
+        top: 10%;
+        left: 45%;
+        color: rgb(127, 127, 137);
+      }
+      #p2 {
+        font-size: 10rem;
+        position: absolute;
+        top: 10%;
+        left: 30%;
+        color: rgb(127, 127, 137);
+      }
+
+      #date {
+        position: absolute;
+        top: 55%;
+        left: 30%;
+        font-size: 3rem;
+        color: rgb(127, 127, 137);
+      }
     </style>
   </head>
   <body>
     <div id="clock">
+      <select name="timezone" id="timezone" onchange="">
+        <option value="UTC+8">台北</option>
+        <option value="UTC+9">日本</option>
+        <option value="UTC+0">英國</option>
+        <option value="UTC-4">紐約</option>
+        <option value="UTC-7">洛杉磯</option>
+        <option value="UTC-10">夏威夷</option>
+      </select>
       <div id="hour"></div>
+      <p id="p1">:</p>
       <div id="minute"></div>
+      <p id="p2">:</p>
       <div id="second" class="animate__pulse"></div>
+      <div id="date"></div>
     </div>
-
+    <script src="./luxon.min.js"></script>
     <script>
       const hour = document.getElementById("hour");
       const minute = document.getElementById("minute");
       const second = document.getElementById("second");
       const digital = document.getElementById("digital");
+      const date = document.getElementById("date");
+
+      // const DateTime = luxon.DateTime;
+      // const dt = DateTime.now();
+      // const setzone = dt.setZone(`${timezone}`);
 
       setInterval(() => {
-        const date = new Date();
-        if (date.getHours() < 10) {
-          hour.innerText = "0" + `${date.getHours()}`;
+        const DateTime = luxon.DateTime;
+        const dt = DateTime.now();
+        const timezone = document.getElementById("timezone").value;
+        const setzone = dt.setZone(`${timezone}`);
+
+        if (setzone.hour < 10) {
+          hour.innerText = "0" + `${setzone.hour}`;
         } else {
-          hour.innerText = `${date.getHours()}`;
+          hour.innerText = `${setzone.hour}`;
         }
 
-        if (date.getMinutes() < 10) {
-          minute.innerText = "0" + `${date.getMinutes()}`;
+        if (dt.minute < 10) {
+          minute.innerText = "0" + `${dt.minute}`;
         } else {
-          minute.innerText = `${date.getMinutes()}`;
+          minute.innerText = `${dt.minute}`;
         }
 
-        if (date.getSeconds() < 10) {
-          second.innerText = "0" + `${date.getSeconds()}`;
+        if (dt.second < 10) {
+          second.innerText = "0" + `${dt.second}`;
         } else {
-          second.innerText = `${date.getSeconds()}`;
+          second.innerText = `${dt.second}`;
         }
+
+        date.innerText = setzone.year + "-" + setzone.month + "-" + setzone.day;
       }, 1000);
     </script>
   </body>
